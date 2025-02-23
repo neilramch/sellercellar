@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 
 export default function Dashboard() {

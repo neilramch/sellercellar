@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { connectDB } from "../../../lib/mongodb";
 import Product from "../../../models/Product";
 
@@ -7,11 +8,19 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
       const { id } = req.query;
+
       console.log("🔍 Fetching product with ID:", id);
 
-      const product = await Product.findById(id);
+      // ✅ Convert `id` to an ObjectId
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        console.error("❌ Invalid ObjectId format:", id);
+        return res.status(400).json({ error: "Invalid product ID format" });
+      }
+
+      const product = await Product.findOne({ _id: new mongoose.Types.ObjectId(id) }).lean();
+
       if (!product) {
-        console.error("❌ Product not found");
+        console.error("❌ Product not found:", id);
         return res.status(404).json({ error: "Product not found" });
       }
 
@@ -19,26 +28,7 @@ export default async function handler(req, res) {
       return res.status(200).json(product);
     } catch (error) {
       console.error("❌ Error fetching product:", error);
-      return res.status(500).json({ error: "Server error", details: error.message });
-    }
-  }
-
-  if (req.method === "DELETE") {
-    try {
-      const { id } = req.query;
-      console.log("🗑 Deleting product with ID:", id);
-
-      const deletedProduct = await Product.findByIdAndDelete(id);
-      if (!deletedProduct) {
-        console.error("❌ Product not found");
-        return res.status(404).json({ error: "Product not found" });
-      }
-
-      console.log("✅ Product deleted:", deletedProduct);
-      return res.status(200).json({ message: "Product deleted successfully" });
-    } catch (error) {
-      console.error("❌ Error deleting product:", error);
-      return res.status(500).json({ error: "Server error", details: error.message });
+      return res.status(500).json({ error: "Internal Server Error" });
     }
   }
 
