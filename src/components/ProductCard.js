@@ -1,9 +1,11 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useCart } from "../context/CartContext";
 
 export default function ProductCard({ product }) {
   const { data: session } = useSession();
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     if (!session) return;
@@ -51,10 +53,7 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <div className="border rounded-lg shadow-md p-4 hover:shadow-lg transition relative">
-      {/* Debugging: Log if session exists */}
-      {console.log("📌 Session Data:", session)}
-
+    <div className="border rounded-lg shadow-md p-4 hover:shadow-lg transition relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg min-h-[375px] flex flex-col">
       {/* Wishlist Button - Heart ❤️ */}
       {session && (
         <button
@@ -68,12 +67,31 @@ export default function ProductCard({ product }) {
       )}
 
       {/* Product Image */}
-      <img src={product.images?.[0] || "/placeholder.jpg"} alt={product.title} className="w-full h-40 object-cover rounded" />
-      
+      <img
+        src={product.images?.[0] || "/placeholder.jpg"}
+        alt={product.title}
+        className="w-full h-40 object-cover rounded"
+      />
+
       {/* Product Details */}
-      <h3 className="text-lg font-bold mt-2">{product.title}</h3>
-      <p className="text-gray-600">${product.price.toFixed(2)}</p>
-      <a href={`/product/${product._id}`} className="text-blue-500">View</a>
+      <div className="flex-grow pb-14">
+        <h3 className="text-base sm:text-lg font-bold mt-2 line-clamp-2">{product.title}</h3>
+        <p className="text-gray-600 text-sm sm:text-base">${product.price.toFixed(2)}</p>
+      </div>
+
+      {/* CTA Section (Fixed to Bottom) */}
+      <div className="absolute bottom-2 left-0 right-0 flex flex-col sm:flex-row justify-between items-center gap-3 p-2">
+        <a href={`/product/${product._id}`} className="text-blue-500 text-sm sm:text-base">
+          View
+        </a>
+
+        <button
+          onClick={() => addToCart(product)}
+          className="bg-green-500 text-white text-sm sm:text-base px-4 py-2 rounded w-full sm:w-auto"
+        >
+          Add to Cart 🛒
+        </button>
+      </div>
     </div>
   );
 }

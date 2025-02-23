@@ -2,11 +2,15 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useState } from "react";
+import { useCart } from "../context/CartContext";
+
 
 export default function NavBar() {
   const { data: session } = useSession();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { cart } = useCart();
+
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -19,7 +23,6 @@ export default function NavBar() {
   return (
     <nav className="bg-gray-900 text-white p-4 flex justify-between items-center">
       <Link href="/" className="text-2xl font-bold">Seller Cellar</Link>
-
       {/* Search Bar */}
       <form onSubmit={handleSearch} className="flex">
   <input
@@ -34,6 +37,7 @@ export default function NavBar() {
 
       {/* Navigation Links */}
       <div className="flex items-center space-x-4">
+        <Link href="/cart" className="relative"> 🛒 Cart ({cart.length}) </Link>
         <Link href="/categories">Categories</Link>
         <Link href="/dashboard">Dashboard</Link>
 
