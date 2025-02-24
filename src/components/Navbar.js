@@ -22,7 +22,7 @@ export default function NavBar() {
 
   return (
     <nav className="bg-gray-900 text-white p-4 flex justify-between items-center">
-      <Link href="/" className="text-2xl font-bold">Seller Cellar</Link>
+      <Link href="/" className="font-extralight text-2xl">Seller Cellar</Link>
       {/* Search Bar */}
       <form onSubmit={handleSearch} className="flex">
         <input

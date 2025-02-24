@@ -58,19 +58,31 @@ export default function Home() {
   return (
     <div className="max-w-7xl mx-auto p-6">
       <div className="text-center my-10">
-        <h1 className="text-4xl font-bold">Welcome to Seller Cellar</h1>
-        <p className="text-gray-600 mt-2">Discover unique products from independent sellers.</p>
+        {/* <h1 className="text-4xl font-bold">Welcome to Seller Cellar</h1>
+        <p className="text-gray-600 mt-2">Discover unique products from independent sellers.</p> */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="md:col-span-3 space-y-10">
           
-          <section>
-            <h2 className="text-2xl font-bold mb-4">🌟 Featured Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {featuredProducts.map((product) => <ProductCard key={product._id} product={product} />)}
+        <section>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <a 
+                href="/categories" 
+                className="col-span-1 sm:col-span-2 relative overflow-hidden rounded-lg shadow-lg"
+                >
+                <img 
+                    src="/Browse.svg" 
+                    alt="Browse Categories" 
+                    className="w-full h-60 object-cover transition-transform duration-300 hover:scale-105"
+                />
+                <div className="absolute inset-0 flex items-center justify-center font-extralight bg-black bg-opacity-40 text-white text-2xl font-bold">
+                    Browse Categories
+                </div>
+                </a>
             </div>
-          </section>
+        </section>
+
 
           <section>
             <h2 className="text-2xl font-bold mb-4">🔥 Most Popular</h2>
