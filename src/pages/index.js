@@ -66,7 +66,7 @@ export default function Home() {
         <div className="md:col-span-3 space-y-10">
           
         <section>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 shadow-md hover:shadow-lg transition ease-in-out">
                 <a 
                 href="/categories" 
                 className="col-span-1 sm:col-span-2 relative overflow-hidden rounded-lg shadow-lg"

@@ -59,7 +59,7 @@ export default function ProductCard({ product }) {
         <button
           onClick={handleWishlist}
           className={`absolute top-2 right-2 p-2 text-lg rounded-full transition ${
-            isWishlisted ? "bg-red-500 text-white" : "bg-gray-200 text-black"
+            isWishlisted ? "bg-gray-200 text-white" : "bg-gray-200 text-black"
           }`}
         >
           {isWishlisted ? "❤️" : "🤍"}

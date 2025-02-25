@@ -29,9 +29,11 @@ export default function NavBar() {
             type="text"
             name="search" // This is needed to access e.target.search.value
             placeholder="Search..."
-            className="w-[30svw] px-3 py-2 text-black rounded-l-md"
+            className="w-[30svw] ml-[50%] px-3 py-2 text-black rounded-l-md"
         />
-        <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-r-md">🔍</button>
+        <button type="submit" className="w-[125px] px-4 py-2 bg-[#f1f1f1] text-white rounded-r-md">
+            <img src="search.png" class="h-[25px] w-[25px] hover:scale-110 hover-scale-[105] bg-transparent" />
+        </button>
       </form>
 
 
